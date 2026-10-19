@@ -29,12 +29,12 @@ List_t* CreateList(uint64_t capacity) {
     return list;
 }
 
-void DestroyList(List_t* list, uint8_t freeElements) {
+void DestroyList(List_t* list, FreeFN_t freeFN) {
     if (list == NULL) return;
-    if (freeElements == 1) { 
+    if (freeFN != NULL) { 
         uint64_t count = list->Count;  
 
-        for (uint64_t i = 0; i < count; i++) free(list->Elements[i]); 
+        for (uint64_t i = 0; i < count; i++) freeFN(list->Elements[i]); 
     }
     if (list->Elements != NULL) free(list->Elements);
     

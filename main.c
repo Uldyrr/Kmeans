@@ -33,7 +33,7 @@ List_t* KMeansAlgorithm(List_t* points, uint16_t K) {
     register uint16_t j;
 
     while (1) {
-        iterations++;
+        iterations++; 
 
         // 2.1. Clear all points of each cluster
         for (j = 0; j < K; j++) {
@@ -93,13 +93,15 @@ List_t* KMeansAlgorithm(List_t* points, uint16_t K) {
         if (centroidsStable) break;
     }
 
-    printf("Iterations: %i\n", iterations);
+    printf("Iterations: %i\n", iterations);  // Note: Can be removed, just simply extra info
 
     return clusters;
 }
 
 
 int main() {
+    // 1. Create points, run the K-means algorithm, and print out the results
+    // EDIT THESE TWO TO WHATEVER YOU LIKE
     const int K = 4;
     float pointsValues[] = {
         1.0f, 0.0f,
@@ -127,6 +129,10 @@ int main() {
 
         printf("Cluster %i: %f, %f\n", i + 1, centroid->X, centroid->Y);
     }
+
+    // 2. Deallocate everything
+    DestroyList(clusters, (FreeFN_t)DestroyCluster);
+    DestroyList(points, NULL);
 
     return 0;
 }

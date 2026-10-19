@@ -20,7 +20,7 @@ Cluster_t* CreateCluster(Vector2_t* initialCentroid) {
 
 void DestroyCluster(Cluster_t* cluster) {
     if (cluster == NULL) return;
-    if (cluster->Points != NULL) DestroyList(cluster->Points, 1);
+    if (cluster->Points != NULL) DestroyList(cluster->Points, (FreeFN_t)DestroyVector2);
     if (cluster->Centroid != NULL) DestroyVector2(cluster->Centroid);
     if (cluster->PreviousCentroid != NULL) DestroyVector2(cluster->PreviousCentroid);
 
